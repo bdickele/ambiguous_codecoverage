@@ -1,14 +1,16 @@
 package org.bdickele.ambiguous.domain;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.Test;
 
-/**
- * Created by Bertrand DICKELE
- */
+
 public class DomainPlumbingTest {
 
     @Test
-    public void test_nothing() {
-
+    public void test_entities_equals() {
+        EqualsVerifier.forClass(Destination.class)
+                .withRedefinedSuperclass().suppress(Warning.STRICT_INHERITANCE)
+                .verify();
     }
 }
