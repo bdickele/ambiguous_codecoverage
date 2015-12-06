@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Table(name="ST_DESTINATION")
 @EqualsAndHashCode(of = "id", doNotUseGetters = true)
 @ToString(of = {"id", "code", "name"}, doNotUseGetters = true)
-public class Destination implements Serializable {
+public final class Destination implements Serializable {
 
     private static final long serialVersionUID = 7005154909722675383L;
 
