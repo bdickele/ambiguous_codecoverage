@@ -1,6 +1,7 @@
 package org.bdickele.ambiguous.domain;
 
 import com.openpojo.reflection.PojoClass;
+import com.openpojo.reflection.impl.PojoClassFactory;
 import com.openpojo.validation.Validator;
 import com.openpojo.validation.ValidatorBuilder;
 import com.openpojo.validation.test.impl.GetterTester;
@@ -29,8 +30,15 @@ public class DomainPlumbing2Test {
                 .build();
     }
 
+    public static Object[] dataprovider() {
+        return PojoClassFactory.getPojoClasses("org.bdickele.ambiguous.domain", null)
+                .stream()
+                .filter(pojoClass -> !pojoClass.getClazz().getSimpleName().contains("Test"))
+                .toArray();
+    }
+
     @Test
-    @Parameters(source = DomainTestClassProvider.class)
+    @Parameters(method= "dataprovider")
     public void test_entities_equals(PojoClass pojoClass) {
         EqualsVerifier.forClass(pojoClass.getClazz())
                 .withRedefinedSuperclass()
@@ -38,7 +46,7 @@ public class DomainPlumbing2Test {
     }
 
     @Test
-    @Parameters(source = DomainTestClassProvider.class)
+    @Parameters(method= "dataprovider")
     public void test_entities_getters_setters(PojoClass pojoClass) {
         openPojoValidator.validate(pojoClass);
     }
