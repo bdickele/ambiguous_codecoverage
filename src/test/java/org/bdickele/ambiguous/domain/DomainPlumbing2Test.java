@@ -30,7 +30,7 @@ public class DomainPlumbing2Test {
                 .build();
     }
 
-    public static Object[] dataprovider() {
+    public Object[] dataprovider() {
         return PojoClassFactory.getPojoClasses("org.bdickele.ambiguous.domain", null)
                 .stream()
                 .filter(pojoClass -> !pojoClass.getClazz().getSimpleName().contains("Test"))
